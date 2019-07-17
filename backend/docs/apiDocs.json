@@ -1,0 +1,15 @@
+{
+    "/api": "api docs",
+    "/api/signup": "signup",
+    "/api/signin": "signin",
+    "/api/signout": "signout",
+    "/api/students": "get all student",
+    "/api/students/:studentId": "get/update student by student",
+    "/api/admin/students": "create new account for student by admin",
+    "/api/admin/students/:studentId": "get/update/delete student by admin",
+    "/api/admin/classes": "get all class by admin/create new class by admin",
+    "/api/admin/classes/:classId": "get/update/delete class by admin",
+    "/api/admin/classes/:classId/students": "get student in class by admin",
+    "/api/admin/classes/:classId/add-student": "add student in class by admin",
+    "/api/admin/classes/:classId/remove-student": "remove student in class by admin"
+}
