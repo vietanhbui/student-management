@@ -1,5 +1,6 @@
 const createError = require('http-errors');
 const express = require('express');
+const socketio = require('socket.io');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -8,12 +9,15 @@ const cors = require('cors');
 const passport = require('passport');
 require('./middleware/passport');
 
+const app = express();
+const io = socketio();
+app.io = io;
+
 const authRouter = require('./routes/auth.router');
 const adminRouter = require('./routes/admin.router');
 const studentRouter = require('./routes/student.router');
 const classRouter = require('./routes/class.router');
-
-const app = express();
+const chatRouter = require('./routes/chat.router')(io);
 
 // database
 require('./database/mongoose');
@@ -45,6 +49,7 @@ app.use('/api', authRouter);
 app.use('/api', studentRouter);
 app.use('/api', adminRouter);
 app.use('/api', classRouter);
+app.use('/', chatRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

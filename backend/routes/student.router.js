@@ -5,7 +5,7 @@ const { getStudent, updateStudent, getAllStudents } = require('../controllers/st
 const { hasAuthorization } = require('../middleware/authorization');
 
 router.get('/students', passport.authenticate('jwt', { session: false }), getAllStudents);
-router.get('/students/:studentId', passport.authenticate('jwt', { session: false }), hasAuthorization, getStudent);
+router.get('/students/:studentId', passport.authenticate('jwt', { session: false }), getStudent);
 router.put('/students/:studentId', passport.authenticate('jwt', { session: false }), hasAuthorization, updateStudent);
 
 module.exports = router;

@@ -7,6 +7,8 @@ const Home = () => import('@/views/Home')
 const EditProfile = () => import('@/views/EditProfile')
 const Classes = () => import('@/views/Classes')
 const ClassDetails = () => import('@/views/ClassDetails')
+const ClassChat = () => import('@/views/ClassChat')
+const PrivateChat = () => import('@/views/PrivateChat')
 
 Vue.use(Router)
 
@@ -43,6 +45,16 @@ const router = new Router({
             name: 'ClassDetails',
             component: ClassDetails,
             props: true
+        },
+        {
+            path: '/chat/class/:className',
+            name: 'ClassChat',
+            component: ClassChat
+        },
+        {
+            path: '/chat/student/:studentId',
+            name: 'PrivateChat',
+            component: PrivateChat
         }
     ]
 })

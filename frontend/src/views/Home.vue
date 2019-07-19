@@ -42,11 +42,14 @@
                         <td>{{ props.item.name }}</td>
                         <td>{{ props.item.email }}</td>
                         <td>{{ props.item.class.join(', ') }}</td>
-                        <td v-if="admin" class="justify-center layout px-0">
-                            <v-icon small class="mr-2" @click="editStudent(props.item)">
+                        <td class="justify-center layout px-0">
+                            <v-icon small class="mr-2" @click="chatStudent(props.item)">
+                                chat
+                            </v-icon>
+                            <v-icon v-if="admin" small class="mr-2" @click="editStudent(props.item)">
                                 edit
                             </v-icon>
-                            <v-icon small @click="deleteStudent(props.item)">
+                            <v-icon v-if="admin" small @click="deleteStudent(props.item)">
                                 delete
                             </v-icon>
                         </td>
@@ -106,6 +109,26 @@ export default {
                 "text": "$vuetify.dataIterator.rowsPerPageAll",
                 "value": -1
             }],
+            headers: [{
+                    text: 'Name',
+                    value: 'name'
+                },
+                {
+                    text: 'Email',
+                    sortable: false,
+                    value: 'email'
+                },
+                {
+                    text: 'Class',
+                    sortable: false,
+                    value: 'class'
+                },
+                {
+                    text: '',
+                    sortable: false,
+                    value: 'button'
+                }
+            ],
             rules: {
                 required: value => !!value || "Required!",
                 email: [
@@ -136,42 +159,7 @@ export default {
         formTitle() {
             return !this.edited ? 'Create student' : 'Edit student'
         },
-        headers() {
-            return this.admin ? [{
-                    text: 'Name',
-                    value: 'name'
-                },
-                {
-                    text: 'Email',
-                    sortable: false,
-                    value: 'email'
-                },
-                {
-                    text: 'Class',
-                    sortable: false,
-                    value: 'class'
-                },
-                {
-                    text: '',
-                    sortable: false,
-                    value: 'button'
-                }
-            ] : [{
-                    text: 'Name',
-                    value: 'name'
-                },
-                {
-                    text: 'Email',
-                    sortable: false,
-                    value: 'email'
-                },
-                {
-                    text: 'Class',
-                    sortable: false,
-                    value: 'class'
-                }
-            ]
-        }
+
     },
     mounted() {
         this.admin = isAuthenticated().student.role === 'admin'
@@ -198,6 +186,9 @@ export default {
                 classArray[i] = classArray[i].class;
             }
             return classArray;
+        },
+        chatStudent(item) {
+            this.$router.push('/chat/student/' + item._id)
         },
         editStudent(item) {
             this.editedIndex = this.students.indexOf(item);
