@@ -5,7 +5,7 @@
                 <v-flex xs12 sm8 md4>
                     <v-card>
                         <v-toolbar dark color="primary">
-                            <v-toolbar-title>Sign in</v-toolbar-title>
+                            <v-toolbar-title>Sign in ahihihhihi</v-toolbar-title>
                         </v-toolbar>
                         <v-form @submit.prevent="handleSave" ref="form">
                             <v-card-text>

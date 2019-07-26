@@ -1,13 +1,19 @@
-version: "3"
+version: "3.7"
 services: 
     db:
         image: mongo
         ports:
             - "27017:27017"
+        volumes: 
+            - ./storage/mongodb:/data/db
+            - /mongodata:/data/db
     backend: 
         build: ./backend
         ports:
             - "4040:4040"
+        volumes: 
+            - ./backend:/app/backend
+            - /app/backend/node_modules/
         depends_on:
             - db
     frontend:
